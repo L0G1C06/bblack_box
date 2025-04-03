@@ -1,0 +1,19 @@
+{
+  "name": "bblack_box",
+  "version": "1.0.0",
+  "description": "Back end app Black Box",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HenryFacens/bblack_box.git"
+  },
+  "author": "Eduardo Weber Maldaner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HenryFacens/bblack_box/issues"
+  },
+  "homepage": "https://github.com/HenryFacens/bblack_box#readme"
+}
