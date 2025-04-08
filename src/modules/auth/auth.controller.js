@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const https = require('https');
 const axios = require('axios');
+const agent = new https.Agent({ family: 4 });
 const { User } = require('../../models');
 
 const secretKey = process.env.JWT_SECRET || 'sua_chave_secreta';
@@ -15,7 +17,9 @@ async function register(req, res) {
 
     // Se o CEP for informado, buscar os dados na API ViaCEP
     if (cep) {
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`, {
+        httpsAgent: agent
+      });
       if (!response.data.erro) {
         address = response.data.logradouro;
         bairro = response.data.bairro;
