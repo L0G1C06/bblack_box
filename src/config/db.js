@@ -6,6 +6,12 @@ if (process.env.PG_URI) {
   // Se existir PG_URI no .env, use ela
   sequelize = new Sequelize(process.env.PG_URI, {
     dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
     logging: false,
   });
 } else {
