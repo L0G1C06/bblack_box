@@ -122,3 +122,29 @@ exports.resetPassword = async (req, res) => {
     res.status(400).json({ error: 'Token inválido ou expirado', details: error.message });
   }
 };
+
+exports.deleteProfile = async (req, res) => {
+  try {
+    // Pegar o token do cabeçalho da requisição
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    if (!token) {
+      return res.status(401).json({ message: 'Token não fornecido' });
+    }
+
+    // Verificar e decodificar o token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'sua_chave_secreta');
+    const userId = decoded.id;
+
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    // Deletar o usuário
+    await user.destroy();
+
+    res.json({ message: 'Perfil deletado com sucesso' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao deletar o perfil do usuário', details: error.message });
+  }
+};

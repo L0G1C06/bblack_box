@@ -47,6 +47,18 @@ router.put('/update', userController.updateProfile);
 
 /**
  * @swagger
+ * /api/user/delete:
+ *   delete:
+ *     summary: Deleta o usuário logado
+ *     description: Deleta o usuário logado no sistema.
+ *     responses:
+ *       200:
+ *         description: Dados do perfil do usuário.
+ */
+router.delete('/delete', userController.deleteProfile);
+
+/**
+ * @swagger
  * /api/user/forgot-password:
  *   post:
  *     summary: Solicitar redefinição de senha
