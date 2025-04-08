@@ -4,8 +4,17 @@ const userController = require('./user.controller');
 
 /**
  * @swagger
+ * tags:
+ *   name: User
+ *   description: Rotas de usuário
+ */
+
+/**
+ * @swagger
  * /api/user/profile:
  *   get:
+ *     tags:
+ *       - User
  *     summary: Perfil do usuário
  *     description: Retorna as informações do perfil do usuário.
  *     responses:
@@ -18,6 +27,8 @@ router.get('/profile', userController.getProfile);
  * @swagger
  * /api/user/update:
  *   put:
+ *     tags:
+ *       - User
  *     summary: Atualizar perfil do usuário
  *     description: Atualiza as informações do perfil do usuário.
  *     requestBody:
@@ -49,6 +60,8 @@ router.put('/update', userController.updateProfile);
  * @swagger
  * /api/user/delete:
  *   delete:
+ *     tags:
+ *       - User
  *     summary: Deleta o usuário logado
  *     description: Deleta o usuário logado no sistema.
  *     responses:
@@ -63,6 +76,8 @@ router.delete('/delete', userController.deleteProfile);
  * @swagger
  * /api/user/forgot-password:
  *   post:
+ *     tags:
+ *       - User
  *     summary: Solicitar redefinição de senha
  *     description: Envia um link de redefinição de senha para o e-mail do usuário, com validade de 15 minutos.
  *     requestBody:
@@ -94,6 +109,8 @@ router.post('/forgot-password', userController.forgotPassword);
  * @swagger
  * /api/user/reset-password:
  *   post:
+ *     tags:
+ *       - User
  *     summary: Redefinir senha do usuário
  *     description: Redefine a senha do usuário a partir de um token de recuperação de senha.
  *     requestBody:

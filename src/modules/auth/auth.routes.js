@@ -4,8 +4,17 @@ const authController = require('./auth.controller');
 
 /**
  * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Rotas de autenticação
+ */
+
+/**
+ * @swagger
  * /api/auth/register:
  *   post:
+ *     tags:
+ *       - Auth
  *     summary: Cadastro de usuário
  *     description: Cria uma nova conta de usuário.
  *     requestBody:
@@ -39,6 +48,8 @@ router.post('/register', authController.register);
  * @swagger
  * /api/auth/login:
  *   post:
+ *     tags:
+ *       - Auth
  *     summary: Login de usuário
  *     description: Autentica o usuário e retorna um token JWT.
  *     requestBody:
@@ -64,6 +75,8 @@ router.post('/login', authController.login);
  * @swagger
  * /api/auth/logout:
  *   post:
+ *     tags:
+ *       - Auth
  *     summary: Logout do usuário
  *     description: Realiza o logout do usuário logado no sistema
  *     responses:
