@@ -53,7 +53,9 @@ router.put('/update', userController.updateProfile);
  *     description: Deleta o usuário logado no sistema.
  *     responses:
  *       200:
- *         description: Dados do perfil do usuário.
+ *         description: Mensagem de sucesso ao deletar o usuário
+ *       404:
+ *         description: Mensagem de erro. Usuário não encontrado para deletar
  */
 router.delete('/delete', userController.deleteProfile);
 

@@ -60,4 +60,18 @@ router.post('/register', authController.register);
  */
 router.post('/login', authController.login);
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout do usuário
+ *     description: Realiza o logout do usuário logado no sistema
+ *     responses:
+ *       200:
+ *         description: Mensagem de sucesso ao realizar o logout
+ *       500:
+ *         description: Mensagem de erro ao tentar realizar o logout
+ */
+router.post('/logout', authController.logout);
+
 module.exports = router;
