@@ -70,4 +70,29 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.logout = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Token não fornecido' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, secretKey);
+
+    // Buscar o usuário pelo ID do token
+    const user = await User.findByPk(decoded.id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    return res.status(200).json({ message: `Logout realizado com sucesso por ${user.nome}` });
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao fazer logout', details: error.message });
+  }
+};
+
+
 exports.register = register;
