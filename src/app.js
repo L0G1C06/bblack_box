@@ -17,12 +17,14 @@ app.use(cors({
 app.use(express.json());
 
 // Rotas existentes
+const baseRoute = require('./modules/health/health.routes');
 const authRoutes = require('./modules/auth/auth.routes');
 const userRoutes = require('./modules/user/user.routes');
 
+app.use('/', baseRoute);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 // Documentação Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 module.exports = app;
