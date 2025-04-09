@@ -11,6 +11,35 @@ const categoriaController = require('./categoria.controller')
 
 /**
  * @swagger
+ * /api/categoria/create:
+ *   post:
+ *     tags:
+ *       - Categoria
+ *     summary: Cria uma nova categoria
+ *     description: Cria uma nova categoria de reporte, apenas se o usuário for admin
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - categoriasReporte
+ *             properties:
+ *               categoriasReporte:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Categoria criada com sucesso
+ *       403:
+ *         description: Usuário não é admin
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.post('/create', categoriaController.createCategoria);
+
+/**
+ * @swagger
  * /api/categoria/get:
  *   get:
  *     tags:
