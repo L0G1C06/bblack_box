@@ -76,4 +76,31 @@ router.post(
  */
 router.get('/get', reporteController.getReportes);
 
+/**
+ * @swagger
+ * /api/reporte/update:
+ *   put:
+ *     tags:
+ *       - Reporte
+ *     summary: Atualizar avaliação do reporte
+ *     description: Atualiza a avaliação do reporte postado
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idReporte:
+ *                 type: integer
+ *               avaliacao:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Usuário atualizado com sucesso!
+ *       400:
+ *         description: Dados inválidos.
+ */
+router.put('/update', reporteController.avaliacaoReporte);
+
 module.exports = router;
