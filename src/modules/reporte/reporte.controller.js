@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
+const { parseAndReverseGeocode } = require('../scripts/geocode');
 
 exports.createReporte = async (req, res) =>{
     try {
@@ -17,38 +18,15 @@ exports.createReporte = async (req, res) =>{
         const nomePerfil = decoded.nome;
 
         let { descricaoReporte, localizacaoReporte } = req.body;
+        let enderecoCompleto;
 
         try {
-            if (typeof localizacaoReporte === 'string') {
-              if (localizacaoReporte.includes(',')) {
-                localizacaoReporte = localizacaoReporte.split(',').map(coord => parseFloat(coord.trim()));
-              } else {
-                localizacaoReporte = JSON.parse(localizacaoReporte);
-              }
-            }
-      
-            if (!Array.isArray(localizacaoReporte) || localizacaoReporte.length !== 2) {
-              throw new Error();
-            }
-          } catch (err) {
-            return res.status(400).json({
-              message: 'Formato inválido para localizacaoReporte. Use [lat, long] ou "lat,long"',
-            });
-          }
-      
-        const [latitude, longitude] = localizacaoReporte;
-      
-        // Faz reverse geocoding para obter nome da rua
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`, {
-            headers: {
-              'User-Agent': 'blackbox-app/1.0 (eduwmaldaner@gmail.com)'  // substitua com seu email real
-            }
-          });
-        const data = await response.json();
-        const rua = data.address.road;
-        const cidade = data.address.city;
-        const estado = data.address.state;
-        const enderecoCompleto = `${rua}, ${cidade}, ${estado}`;
+            const resultado = await parseAndReverseGeocode(localizacaoReporte);
+            enderecoCompleto = resultado.endereco;
+        } catch (err) {
+            const statusCode = err.code || 500;
+            return res.status(statusCode).json({ message: err.message });
+        }
 
         // Pegar imagem do reporte enviada
         const imagemReporte = req.files.imagemReporte[0].path;
