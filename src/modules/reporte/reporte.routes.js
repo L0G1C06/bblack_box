@@ -12,13 +12,6 @@ const upload = require('../../middleware/upload')
 
 /**
  * @swagger
- * tags:
- *   name: Reporte
- *   description: Rotas de criação e visualização de reportes
- */
-
-/**
- * @swagger
  * /api/reporte/create:
  *   post:
  *     tags:

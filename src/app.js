@@ -21,11 +21,13 @@ const baseRoute = require('./modules/health/health.routes');
 const authRoutes = require('./modules/auth/auth.routes');
 const userRoutes = require('./modules/user/user.routes');
 const reporteRoutes = require('./modules/reporte/reporte.routes');
+const categoriaRoutes = require('./modules/categoria/categoria.routes');
 
 app.use('/', baseRoute);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/reporte', reporteRoutes);
+app.use('/api/categoria', categoriaRoutes);
 // Documentação Swagger
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
