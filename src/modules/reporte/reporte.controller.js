@@ -59,3 +59,25 @@ exports.createReporte = async (req, res) =>{
         return res.status(500).json({ message: 'Erro interno do servidor.' })
     }
 }
+
+exports.getReportes = async (req, res) => {
+    try {
+        // Pegar token do cabeçalho da requisição
+        const token = req.header('Authorization')?.replace('Bearer ', '');
+        if (!token) {
+            return res.status(401).json({ message: 'Token não fornecido' });
+        }
+        // Verificar e decodificar o token
+        jwt.verify(token, process.env.JWT_SECRET || 'sua_chave_secreta');
+
+        // Buscar todos os reportes na tabela
+        const reportes = await Reporte.findAll();
+
+        return res.status(200).json({
+            data: reportes
+        });
+    } catch (error) {
+        console.error('Erro ao listar reportes: ', error);
+        return res.status(500).json({ message: 'Erro interno do servidor.' })
+    }
+}

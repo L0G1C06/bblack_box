@@ -62,4 +62,18 @@ router.post(
     reporteController.createReporte
 );
 
+/**
+ * @swagger
+ * /api/reporte/get:
+ *   get:
+ *     tags:
+ *       - Reporte
+ *     summary: Retorna reportes
+ *     description: Retorna todos os reportes criados
+ *     responses:
+ *       200:
+ *         description: Reportes criados
+ */
+router.get('/get', reporteController.getReportes);
+
 module.exports = router;
