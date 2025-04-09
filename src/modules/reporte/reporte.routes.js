@@ -34,8 +34,11 @@ const upload = require('../../middleware/upload')
  *             required:
  *               - descricaoReporte
  *               - imagemReporte
+ *               - localizacaoReporte
  *             properties:
  *               descricaoReporte:
+ *                 type: string
+ *               localizacaoReporte:
  *                 type: string
  *               imagemReporte:
  *                 type: array
