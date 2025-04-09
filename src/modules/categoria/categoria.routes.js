@@ -11,6 +11,35 @@ const categoriaController = require('./categoria.controller')
 
 /**
  * @swagger
+ * /api/categoria/create:
+ *   post:
+ *     tags:
+ *       - Categoria
+ *     summary: Cria uma nova categoria
+ *     description: Cria uma nova categoria de reporte, apenas se o usuário for admin
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - categoriasReporte
+ *             properties:
+ *               categoriasReporte:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Categoria criada com sucesso
+ *       403:
+ *         description: Usuário não é admin
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.post('/create', categoriaController.createCategoria);
+
+/**
+ * @swagger
  * /api/categoria/get:
  *   get:
  *     tags:
@@ -24,5 +53,33 @@ const categoriaController = require('./categoria.controller')
  *         description: Erro interno do servidor
  */
 router.get('/get', categoriaController.listCategorias);
+
+/**
+ * @swagger
+ * /api/categoria/{id}:
+ *   delete:
+ *     tags:
+ *       - Categoria
+ *     summary: Deleta uma categoria
+ *     description: Deleta uma categoria existente. Apenas usuários com papel de administrador (admin) têm permissão para deletar.
+ *     parameters:
+ *       - name: id
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Categoria deletada com sucesso
+ *       400:
+ *         description: ID da categoria não fornecido
+ *       401:
+ *         description: Token não fornecido ou inválido
+ *       403:
+ *         description: Acesso negado. Somente administradores podem deletar categorias
+ *       404:
+ *         description: Categoria não encontrada
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.delete('/:id', categoriaController.deleteCategoria);
 
 module.exports = router;
