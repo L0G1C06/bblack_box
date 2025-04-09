@@ -25,11 +25,11 @@ exports.createReporte = async (req, res) =>{
         const imagemReporte = req.files.imagemReporte[0].path;
 
         // Sorteia uma imagem da pasta 'static/fotosPerfil/'
-        //const fotosPerfilDir = path.join(__dirname, '..', '..', 'static', 'fotosPerfil');
-        //const fotos = fs.readdirSync(fotosPerfilDir);
-        //const fotosSorted = fotos[Math.floor(Math.random() * fotos.length)];
-        //const fotosPerfil = path.join(fotosPerfilDir, fotosSorted);
-        const fotoPerfil = "Imagem simulada";
+        const fotosPerfilDir = path.join(__dirname, '..', '..', 'static', 'fotosPerfil');
+        const fotos = fs.readdirSync(fotosPerfilDir);
+        const fotosSorted = fotos[Math.floor(Math.random() * fotos.length)];
+        const fotoPerfil = path.join(fotosPerfilDir, fotosSorted);
+        //const fotoPerfil = "Imagem simulada";
 
         const horarioReporte = new Date();
         const localizacaoReporte = 'Localizacao simulada';
