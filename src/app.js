@@ -20,10 +20,12 @@ app.use(express.json());
 const baseRoute = require('./modules/health/health.routes');
 const authRoutes = require('./modules/auth/auth.routes');
 const userRoutes = require('./modules/user/user.routes');
+const reporteRoutes = require('./modules/reporte/reporte.routes');
 
 app.use('/', baseRoute);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/reporte', reporteRoutes);
 // Documentação Swagger
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
