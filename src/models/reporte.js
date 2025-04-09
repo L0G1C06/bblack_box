@@ -44,6 +44,14 @@ module.exports = (sequelize, DataTypes) => {
                 min: 0,
                 max: 5
             }
+        },
+        categoriaReporte: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        statusReporte: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }, {
         tableName: 'reporte',

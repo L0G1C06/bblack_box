@@ -2,7 +2,6 @@ const { Reporte } = require('../../models');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
 const { parseAndReverseGeocode } = require('../scripts/geocode');
 
 exports.createReporte = async (req, res) =>{
