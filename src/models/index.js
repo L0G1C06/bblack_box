@@ -5,12 +5,22 @@ const Reporte = require('./reporte')(sequelize, DataTypes);
 const Categoria = require('./categoria')(sequelize, DataTypes);
 const Status = require('./status')(sequelize, DataTypes);
 const InteracoesReporte = require('./interacoesReporte')(sequelize, DataTypes);
+const ComentarioReporte = require('./comentarioReporte')(sequelize, DataTypes);
 
-module.exports = {
+const db = {
     sequelize,
     User,
     Reporte,
     Categoria,
     Status,
     InteracoesReporte,
+    ComentarioReporte,
   };
+
+Object.values(db).forEach(model => {
+  if (model?.associate) {
+    model.associate(db);
+  }
+});
+
+module.exports = db;
